@@ -5,14 +5,26 @@ using UnityEngine;
 public class LoadAreaObject : MonoBehaviour
 {
     public static string ToArea;
+    public static string Direction;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+       
         if(ToArea == gameObject.name)
         {
-            GameObject.Find("Player").transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+            if(Direction == "up")
+            {
+                GameObject.Find("Player").transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 20);
+            }
+            else
+            {
+                GameObject.Find("Player").transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+            }
+
+        
+           
+           
         }
     }
 

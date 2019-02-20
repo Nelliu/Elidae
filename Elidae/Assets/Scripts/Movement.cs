@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     Animator animator;
     private Vector2 input = new Vector2(0, 0);
     private Rigidbody2D rb;
-    private bool playerExists = false;
+    private static bool playerExists;
     
 
  
@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             
         }
        
@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour
     {
         // velocity == real life gravitace
         input = rb.velocity;   //.y = -1 * speed;
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) == true && Input.GetKey(KeyCode.A) == false)
         {
             animator.SetFloat("MovRight", 2);
             input.x = speed;
@@ -47,10 +47,13 @@ public class Movement : MonoBehaviour
         else if (Input.GetKey(KeyCode.D) == false)
         {
             animator.SetFloat("MovRight", 0);
-            
+        }
+        else if (Input.GetKey(KeyCode.D) == true && Input.GetKey(KeyCode.A) == true)
+        {
+            animator.SetFloat("MovRight", 0);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.D) == false)
         {
             input.x = -speed;
             animator.SetFloat("MovLeft", 2);
@@ -58,7 +61,10 @@ public class Movement : MonoBehaviour
         else if (Input.GetKey(KeyCode.A) == false)
         {
             animator.SetFloat("MovLeft", 0);
-       
+        }
+        else if (Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.D) == true)
+        {
+            animator.SetFloat("MovLeft", 0);
         }
 
         if (Input.GetKey(KeyCode.W) == true && Input.GetKey(KeyCode.A) == false && Input.GetKey(KeyCode.D) == false)

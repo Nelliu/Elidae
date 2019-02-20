@@ -7,6 +7,7 @@ public class LoadArea : MonoBehaviour
 {
     public string levelToLoad;
     public string EntranceID;
+    public string direction;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class LoadArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            LoadAreaObject.Direction = direction;
             LoadAreaObject.ToArea = EntranceID;
             SceneManager.LoadScene(levelToLoad);
         }
