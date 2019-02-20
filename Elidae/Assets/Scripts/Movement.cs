@@ -37,6 +37,16 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        CheckMovement();
+
+
+        rb.velocity = input;        // objekt bde rizen gravitaci
+    }
+
+   
+    private void CheckMovement()
+    {
         // velocity == real life gravitace
         input = rb.velocity;   //.y = -1 * speed;
         if (Input.GetKey(KeyCode.D) == true && Input.GetKey(KeyCode.A) == false)
@@ -82,7 +92,7 @@ public class Movement : MonoBehaviour
             input.y = speed;
             animator.SetFloat("MovUP", 0);
             animator.SetFloat("MovLeft", 2);
-           
+
         }
         else if (Input.GetKey(KeyCode.W) == true && Input.GetKey(KeyCode.D) == true)
         {
@@ -102,7 +112,7 @@ public class Movement : MonoBehaviour
         else if (Input.GetKey(KeyCode.S) == false)
         {
             animator.SetFloat("MovDown", 0);
-      
+
         }
         else if (Input.GetKey(KeyCode.S) == true && Input.GetKey(KeyCode.A) == true)
         {
@@ -119,13 +129,6 @@ public class Movement : MonoBehaviour
             animator.SetFloat("MovDown", 0);
             animator.SetFloat("MovLeft", 0);
         }
-
-
-
-        rb.velocity = input;        // objekt bde rizen gravitaci
     }
-
-   
-
 
 }

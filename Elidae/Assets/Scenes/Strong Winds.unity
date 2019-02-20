@@ -499,6 +499,11 @@ PrefabInstance:
       propertyPath: m_projectionMatrixMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6314680832986832441, guid: 99828832493b22e42bb82ae6a0161140,
+        type: 3}
+      propertyPath: orthographic size
+      value: 68
+      objectReference: {fileID: 0}
     - target: {fileID: 1930971902043490013, guid: 99828832493b22e42bb82ae6a0161140,
         type: 3}
       propertyPath: m_Enabled
