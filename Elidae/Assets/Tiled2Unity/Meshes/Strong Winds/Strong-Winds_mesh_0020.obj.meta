@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 604c2ccf9bc2a1a4babe4b494bf462cf
-=======
-guid: ccadcc41765b29c47b36235dea8f33c0
->>>>>>> origin/beta-v1
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -11,9 +7,11 @@ ModelImporter:
     100002: //RootNode
     400000: Strong-Winds_mesh_0020
     400002: //RootNode
+    2100000: Strong-Winds_mesh_0020Mat
     2300000: Strong-Winds_mesh_0020
     3300000: Strong-Winds_mesh_0020
     4300000: Strong-Winds_mesh_0020
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -67,7 +65,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
