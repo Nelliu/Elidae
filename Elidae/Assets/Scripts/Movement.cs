@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour
         CheckMovement();
 
 
-        rb.velocity = input;        // objekt bde rizen gravitaci
+        rb.velocity = input;     
     }
 
    
