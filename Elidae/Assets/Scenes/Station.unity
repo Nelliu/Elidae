@@ -266,13 +266,19 @@ PrefabInstance:
     - target: {fileID: 7279975254024027367, guid: 36cca4e3b22343c4ebfcefea16987dfc,
         type: 3}
       propertyPath: direction
-      value: 
+      value: down
       objectReference: {fileID: 0}
     - target: {fileID: 7279975254024027367, guid: 36cca4e3b22343c4ebfcefea16987dfc,
         type: 3}
       propertyPath: levelToLoad
       value: Strong Winds
       objectReference: {fileID: 0}
+    - target: {fileID: 7279975254024027364, guid: 36cca4e3b22343c4ebfcefea16987dfc,
+        type: 3}
+      propertyPath: PlayerObject
+      value: 
+      objectReference: {fileID: 1960078601429318236, guid: b83ac77edb8f48341b14e3a65eb3356a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36cca4e3b22343c4ebfcefea16987dfc, type: 3}
 --- !u!1001 &812393045
@@ -350,12 +356,18 @@ PrefabInstance:
     - target: {fileID: 7279975254024027367, guid: 36cca4e3b22343c4ebfcefea16987dfc,
         type: 3}
       propertyPath: direction
-      value: 
+      value: down
       objectReference: {fileID: 0}
     - target: {fileID: 7279975254024027367, guid: 36cca4e3b22343c4ebfcefea16987dfc,
         type: 3}
       propertyPath: levelToLoad
       value: Strong Winds
       objectReference: {fileID: 0}
+    - target: {fileID: 7279975254024027364, guid: 36cca4e3b22343c4ebfcefea16987dfc,
+        type: 3}
+      propertyPath: PlayerObject
+      value: 
+      objectReference: {fileID: 1960078601429318236, guid: b83ac77edb8f48341b14e3a65eb3356a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36cca4e3b22343c4ebfcefea16987dfc, type: 3}
