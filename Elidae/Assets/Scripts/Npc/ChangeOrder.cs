@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeOrder : MonoBehaviour
-{
+{                   
+    
+    
+    // logic for npc ORDER IN LAYER, -> if player is before or behind npc (normal sized npc only)
 
     public GameObject NpcObject;
     // Start is called before the first frame update

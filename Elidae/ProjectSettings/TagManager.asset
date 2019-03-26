@@ -10,6 +10,8 @@ TagManager:
   - Friendly_Npc
   - Canvas
   - InventorySlot
+  - DialogUI
+  - DialogWindowUI
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - AboveUI
   - 
   - 
   - 
@@ -44,9 +46,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: AboveUI
+    uniqueID: 3721815867
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Above
-    uniqueID: 3721815867
+  - name: New Layer
+    uniqueID: 3297100055
     locked: 0

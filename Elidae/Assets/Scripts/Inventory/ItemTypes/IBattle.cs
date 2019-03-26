@@ -7,6 +7,8 @@ namespace Assets.Scripts.Inventory.ItemTypes
 {
     public interface IBattle
     {
+     //   string a { get; set; }
+
         void DealDamage();
     }
 }

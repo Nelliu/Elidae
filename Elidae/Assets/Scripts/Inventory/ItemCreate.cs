@@ -12,7 +12,7 @@ public class ItemCreate : EditorWindow
     int selected = 0;
     int DamageInput;
     int WorthInput;
-
+    string Description;
 
     [MenuItem("Window/ItemCreate")]
     public static void ShowWindow()
@@ -23,7 +23,9 @@ public class ItemCreate : EditorWindow
     {
         Name = EditorGUILayout.TextField("Name", Name);
         Icon = (Texture2D)EditorGUILayout.ObjectField("Image", Icon, typeof(Texture2D), false);
-        
+        Description = EditorGUILayout.TextField("Description", Description);
+
+
         string[] options = new string[]
         {
         "Weapon", "Boots", "Quest (not working)", "Accessory (not working)"
@@ -43,6 +45,10 @@ public class ItemCreate : EditorWindow
         }
 
         WorthInput = EditorGUILayout.IntField("Worth in gold:", WorthInput);
+
+
+    
+
 
         if (GUILayout.Button("Save item"))
         {
@@ -66,6 +72,7 @@ public class ItemCreate : EditorWindow
             staff.StaffType = 1;
             staff.ItemType = selected;
             staff.Damage = DamageInput;
+            staff.Description = Description;
     
            
             return staff;
@@ -75,10 +82,11 @@ public class ItemCreate : EditorWindow
             Boots boots = new Boots();
             boots.Name = Name;
             boots.Icon = Icon.name;
-            boots.ItemID = 0;
+            boots.ItemID = SaveSystem.GetNewID();
             boots.Speed = DamageInput;
             boots.Price = WorthInput;
             boots.ItemType = selected;
+            boots.Description = Description;
             return boots;
         }
         else if (selected == 2)
@@ -88,15 +96,8 @@ public class ItemCreate : EditorWindow
         }
         else
         {
-            Staff staff = new Staff();
-            staff.Icon = Icon.name;
-            staff.ItemID = 0;
-            staff.Name = Name;
-            staff.Price = WorthInput;
-            staff.StaffType = 1;
-            staff.Damage = DamageInput;
-            staff.ItemType = selected;
-            return staff;
+            // do stuff here
+            return null;
         }
 
     }

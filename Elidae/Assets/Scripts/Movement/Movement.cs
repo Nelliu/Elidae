@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
 
         rb = gameObject.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        Debug.Log(Application.persistentDataPath + "/items.dat");
 
         if (!playerExists)
         {
@@ -32,6 +33,7 @@ public class Movement : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            Destroy(CanvasGUI);
             
         }
         
@@ -58,7 +60,7 @@ public class Movement : MonoBehaviour
         
         
     }
-
+    private int multiplier = 450;
    
     private void CheckMovement()
     {
@@ -68,7 +70,7 @@ public class Movement : MonoBehaviour
         {
             animator.SetFloat("MoveRight", 2);
             
-            input.x = speed;
+            input.x = speed * multiplier * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.D) == false)
         {
@@ -83,7 +85,7 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.D) == false)
         {
-            input.x = -speed;
+            input.x = -speed * multiplier * Time.deltaTime;
            
             animator.SetFloat("MoveLeft", 2);
         }
@@ -100,8 +102,8 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) == true && Input.GetKey(KeyCode.A) == false && Input.GetKey(KeyCode.D) == false)
         {
-            input.y = speed;
-         
+            input.y = speed * multiplier * Time.deltaTime;
+
             animator.SetFloat("MoveUp", 2);
         }
         else if (Input.GetKey(KeyCode.W) == false)
@@ -112,15 +114,15 @@ public class Movement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.W) == true && Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.D) == false)
         {
-            input.y = speed;
-           animator.SetFloat("MoveUp", 0);
-           animator.SetFloat("MoveLeft", 2);
+            input.y = speed * multiplier * Time.deltaTime;
+            animator.SetFloat("MoveUp", 0);
+            animator.SetFloat("MoveLeft", 2);
     
 
         }
         else if (Input.GetKey(KeyCode.W) == true && Input.GetKey(KeyCode.D) == true && Input.GetKey(KeyCode.A) == false)
         {
-            input.y = speed;
+            input.y = speed * multiplier * Time.deltaTime;
             animator.SetFloat("MoveUp", 0);
             animator.SetFloat("MoveRight", 2);
         }
@@ -134,7 +136,7 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.S) == true && Input.GetKey(KeyCode.A) == false && Input.GetKey(KeyCode.D) == false)
         {
-            input.y = -speed;
+            input.y = -speed * multiplier * Time.deltaTime;
             animator.SetFloat("MoveDown", 2);
            
 
@@ -147,7 +149,7 @@ public class Movement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S) == true && Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.D) == false)
         {
-            input.y = -speed;
+            input.y = -speed * multiplier * Time.deltaTime;
             animator.SetFloat("MoveDown", 0);
             animator.SetFloat("MoveLeft", 2);
 
@@ -155,7 +157,7 @@ public class Movement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S) == true && Input.GetKey(KeyCode.D) == true && Input.GetKey(KeyCode.A) == false)
         {
-            input.y = -speed;
+            input.y = -speed * multiplier * Time.deltaTime;
             animator.SetFloat("MoveRight", 2);
             animator.SetFloat("MoveDown", 0);
             animator.SetFloat("MoveLeft", 0);
@@ -168,7 +170,7 @@ public class Movement : MonoBehaviour
 
 
 
-     
+     /*
         if (Input.GetMouseButtonUp(0))
         {
             Vector3 mouseStartPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
@@ -179,6 +181,7 @@ public class Movement : MonoBehaviour
             //transform.position = pz;
 
         }
+        */
     }
 
 
