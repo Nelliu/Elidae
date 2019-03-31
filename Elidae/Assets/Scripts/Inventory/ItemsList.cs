@@ -26,7 +26,7 @@ namespace Assets.Scripts.Inventory
 
         private void OnEnable()
         {
-            if (SaveSystem.FileExists())
+            if (SaveSystem.FileExists(SaveSystem.path))
             {
                 Items = SaveSystem.LoadItems();
                 for (int i = 0; i < Items.Count; i++)

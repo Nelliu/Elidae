@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 public static class SaveSystem
 {
-    private static string path = Application.persistentDataPath + "/items.dat";
+    public static string path = Application.persistentDataPath + "/items.dat";
+    private static string repath = "Assets/Saves";
     private static List<AItem> Items = new List<AItem>();
     private static List<string> FolderResources = new List<string>() { "boot", "accessory", "armor", "drops", "food", "glove","helmet", "material", "pill", "potion", "quest", "ring", "shield", "skill", "weapon"};
 
@@ -43,6 +44,9 @@ public static class SaveSystem
 
     }
 
+   
+
+
     public static List<AItem> LoadItems() // load data from save file
     {
        
@@ -77,9 +81,9 @@ public static class SaveSystem
 
 
     }
-    public static bool FileExists()
+    public static bool FileExists(string Path)
     {
-        if (File.Exists(path))
+        if (File.Exists(Path))
         {
             return true;
         }
@@ -169,4 +173,105 @@ public static class SaveSystem
             
     }
 
+
+           /// Quest Actions 
+      
+    public static void SaveQuest(AQuest quest)
+    {
+        List<AQuest> quests = new List<AQuest>();
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        if (!File.Exists(repath + "/Quests.dat"))
+        {
+            Debug.Log(repath + "/Quests.dat");
+            quests.Add(quest);
+
+            FileStream stream = new FileStream(repath + "/Quests.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+            formatter.Serialize(stream, quests);
+            stream.Position = 0;
+            stream.Close();
+            Debug.Log("Saved1");
+        }
+        else
+        {
+            quests = LoadQuests();
+            quests.Add(quest);
+
+            FileStream stream = new FileStream(repath + "/Quests.dat", FileMode.Create, FileAccess.Write);
+
+            formatter.Serialize(stream, quests);
+            stream.Position = 0;
+            stream.Close();
+            Debug.Log("Saved454");
+        }
+
+    } // logic for saving quest
+
+    public static List<AQuest> LoadQuests()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        if (File.Exists(repath + "/Quests.dat"))
+        {
+            List<AQuest> data = new List<AQuest>();
+            
+
+            FileStream stream = File.Open(repath + "/Quests.dat", FileMode.Open);
+            data = (List<AQuest>)formatter.Deserialize(stream);
+            stream.Position = 0;
+            stream.Close();
+            Debug.Log("Data loaded");
+            // Debug.Log(Application.persistentDataPath + "/items.dat");
+            return data;
+
+        }
+        else
+        {
+            List<AQuest> data = new List<AQuest>();
+
+
+            FileStream stream = File.Open(repath + "/Quests.dat", FileMode.Create);
+            data = (List<AQuest>)formatter.Deserialize(stream);
+            stream.Position = 0;
+            stream.Close();
+            // Debug.Log("Data loaded");
+            // Debug.Log(Application.persistentDataPath + "/items.dat");
+
+            return data;
+        }
+    }   // logic for loading all quests into list
+
+    public static AQuest GetQuest(string name)
+    {
+        AQuest quest = null;
+        if (FileExists(repath + "/Quests.dat"))
+        {
+            List<AQuest> quests = LoadQuests();
+            for (int i = 0; i < quests.Count; i++)
+            {
+                if (quests[i].QuestName == name)
+                {
+                    quest = quests[i];
+
+                   
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Quest file doesnt exist, create one first");
+            return quest;
+        }
+        if (quest == null)
+        {
+            Debug.Log("Something is wrong or quest doesnt exist, try checking its name");
+            return quest;
+          
+        }
+        else
+        {
+            return quest;
+        }
+    } // loading specific quest by its name ^^^^
+    
 }

@@ -11,7 +11,7 @@ public class Movement : MonoBehaviour
     private static bool playerExists;
     public static bool MovementDisabled;
     public GameObject CanvasGUI;
-    
+    public GameObject EventSystem;
     
  
 
@@ -22,18 +22,20 @@ public class Movement : MonoBehaviour
 
         rb = gameObject.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        Debug.Log(Application.persistentDataPath + "/items.dat");
+        //Debug.Log(Application.persistentDataPath + "/items.dat");
 
         if (!playerExists)
         {
             DontDestroyOnLoad(CanvasGUI);
             DontDestroyOnLoad(gameObject);
             playerExists = true;
+            DontDestroyOnLoad(EventSystem);
         }
         else
         {
             Destroy(gameObject);
             Destroy(CanvasGUI);
+            Destroy(EventSystem);
             
         }
         

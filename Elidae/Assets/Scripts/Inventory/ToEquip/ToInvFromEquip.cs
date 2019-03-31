@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Inventory.Item;
+using Assets.Scripts.Inventory.ItemTypes;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -19,10 +21,13 @@ public class ToInvFromEquip : MonoBehaviour
     private Text itemIDcomponent;
     private Image image;
     private Color color;
+    private Movement moveScript;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        moveScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         color = Color.white;
         color.a = 0.3f;
         image = Icon.GetComponent<Image>();
@@ -52,6 +57,14 @@ public class ToInvFromEquip : MonoBehaviour
             {
                 if (ParentButton.name.Contains(parents[i]))
                 {
+                    AItem a = SaveSystem.GetItem(int.Parse(itemIDcomponent.text));
+                    if (a.ItemType == 1)
+                    {
+                        Boots boot = (Boots)a;
+                        moveScript.speed = 10 - boot.Speed;
+                    }
+
+
                     image.sprite = sprites[i];
                     image.color = color;
                     Inventory.AddItem(int.Parse(itemIDcomponent.text));
@@ -63,9 +76,15 @@ public class ToInvFromEquip : MonoBehaviour
         }
         else print("inventory full"); 
     }
-    public static void ItemAction(int itemtype)
+    public static void ItemReplace (GameObject objectToSwapFrom) // switching places if something is already equipped
     {
-        // switching places if something is already equipped
+
+
+        
+        Text id = objectToSwapFrom.transform.Find("Id").GetComponent<Text>();
+
+        Inventory.AddItem(int.Parse(id.text));
+
     }
 
 

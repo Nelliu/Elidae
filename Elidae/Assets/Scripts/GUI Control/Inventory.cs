@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     public GameObject InventoryUI;
     public GameObject EquipmentUI;
 
-    public static List<int> EquippedItems = new List<int>();
+   
 
     public string ItemToAdd;
     public GameObject[] InventorySlots;
@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
 
 
 
-    private static List<ToEquipFromInv> script = new List<ToEquipFromInv>();
+   
         
     // Start is called before the first frame update
     void Start()
@@ -35,9 +35,12 @@ public class Inventory : MonoBehaviour
         {
             Images.Add(InventorySlots[i].transform.Find("Icon").GetComponent<Image>());
             Ids.Add(InventorySlots[i].transform.Find("Id").GetComponent<Text>());
-            script.Add(InventorySlots[i].transform.Find("Id").GetComponent<ToEquipFromInv>());
+          
 
-           
+            if (i != 0)
+            {
+                InventorySlots[i].transform.Find("Id").GetComponent<ToEquipFromInv>().FieldID = i;
+            }
             
             
 
@@ -97,6 +100,7 @@ public class Inventory : MonoBehaviour
             }
             else EquipmentUI.SetActive(true);
         }
+       
 
 
         
@@ -128,7 +132,7 @@ public class Inventory : MonoBehaviour
 
                 
                 Ids[i].text = (adding.ItemID).ToString();
-                script[i].FieldID = i;  
+ 
 
                 break;
             }

@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Inventory.ItemTypes;
+﻿using Assets.Scripts.Inventory.Item;
+using Assets.Scripts.Inventory.ItemTypes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,20 +15,22 @@ public class ToEquipFromInv : MonoBehaviour
 
     public GameObject[] EquipObjects; // should be in same order as item types are, means weapon 0, boots 1 etc. - viz Item folder, would be decent to go same as list in "ToInvFromEquip.cs"
 
-    private List<GameObject> buttons = new List<GameObject>();
+
     private List<int> itemTypes = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
     private Image ObjectImage;
     private Text equipItemID;
     private bool parsed;
     private Color color = Color.white;
     private int itemControl;
-    private AItem loadItem;
+    
 
+
+    private Movement moveScript;
     // Start is called before the first frame update
     void Start()
     {
-    
 
+        moveScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
 
 
         color.a = 255;
@@ -75,26 +78,28 @@ public class ToEquipFromInv : MonoBehaviour
     {
         imageComponent.GetComponent<Image>().enabled = false;
         itemIDComponent.text = "";
-
-        for (int i = 0; i < Inventory.FilledSlots.Count; i++)
+        for (int i = 0; i < Inventory.InvSlots.Length; i++)
         {
-            if (Inventory.FilledSlots[i] == FieldID)
+            if (Inventory.InvSlots[i].transform.Find("Id").GetComponent<Text>().text == "")
             {
-                Inventory.FilledSlots.Remove(i);
-                Inventory.EquippedItems.Add(loadItem.ItemID);
+                if (Inventory.FilledSlots.Contains(Inventory.InvSlots[i].transform.Find("Id").GetComponent<ToEquipFromInv>().FieldID))
+                {
+                    Inventory.FilledSlots.Remove(Inventory.InvSlots[i].transform.Find("Id").GetComponent<ToEquipFromInv>().FieldID);
+                }
             }
-
         }
     }
 
 
     public void ItemAction()
     {
+        AItem loadItem;
+        
         parsed = false;
         
-        if(SaveSystem.FileExists())
+        if(SaveSystem.FileExists(SaveSystem.path))
         {
-         
+        
             if (itemID != -1)
             {
           
@@ -103,6 +108,13 @@ public class ToEquipFromInv : MonoBehaviour
                 {
                     if (itemTypes[i] == loadItem.ItemType)
                     {
+                        if (loadItem.ItemType == 1)
+                        {
+                            Boots boots = (Boots)loadItem;
+
+                            moveScript.speed = moveScript.speed + boots.Speed;
+                        }
+
                         ObjectImage = EquipObjects[i].transform.Find("Icon").GetComponent<Image>();
                         equipItemID = EquipObjects[i].transform.Find("Id").GetComponent<Text>();
                         if (ObjectImage.color.a != 255) // fill image in equip for weapon == equipped
@@ -112,19 +124,26 @@ public class ToEquipFromInv : MonoBehaviour
                             ObjectImage.sprite = SaveSystem.GetImage(loadItem.Icon);
 
                             RemoveFromInventoryList();
+                            itemID = -1;
                             break;
                         }
                         else
                         {
                             // something is here
-                            
-                           /* ObjectImage.color = color;
-                            equipItemID.text = (loadItem.ItemID).ToString();
-                            ObjectImage.sprite = SaveSystem.GetImage(loadItem.Icon);
+                            if (itemIDComponent.text != "")
+                            {
+                                ToInvFromEquip.ItemReplace(EquipObjects[loadItem.ItemType]);
 
-                            RemoveFromInventoryList();
-                            ToInvFromEquip.ItemAction(loadItem.ItemType);
-                            break;*/
+                                ObjectImage.color = color;
+                                equipItemID.text = (loadItem.ItemID).ToString();
+                                ObjectImage.sprite = SaveSystem.GetImage(loadItem.Icon);
+                               
+                                RemoveFromInventoryList();
+
+                                break;
+                            }
+                            
+                            
                         }
                     }
                 }
